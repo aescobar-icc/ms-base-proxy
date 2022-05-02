@@ -1,7 +1,7 @@
 version: '3.5'
 services:
   ms-base-proxy:
-    image: aescobaricc/ms-base-proxy:0.0.1
+    image: aescobaricc/ms-base-proxy:0.0.2
     container_name: ms-base-proxy
     restart: always
     build: .

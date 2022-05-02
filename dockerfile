@@ -9,4 +9,5 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY run.sh /run.sh
 
 
-CMD exec nginx -g 'daemon off;'
+#CMD exec nginx -g 'daemon off;'
+ENTRYPOINT bash /run.sh
