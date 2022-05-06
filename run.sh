@@ -26,13 +26,17 @@ resolve_conf_files(){
 	for temp in $(ls $TEMP_PATH/*.temp); do
 		pre=$(basename $temp .temp)
 		res="$pre.conf"
-		resolve_conf ${pre^^} $temp $TEMP_PATH/$res
+		resolve_conf "^${pre^^}_" $temp $TEMP_PATH/$res
 	done
 }
 
-SITES_ENABLE_PATH="/etc/nginx/sites-enabled"
 
 #resolve all config files in $SITES_ENABLE_PATH with env values like site_xxx.temp and generate site_xxx.conf with resolved values
-resolve_conf_files $SITES_ENABLE_PATH
+resolve_conf_files $NGINX_CONF_SITES_ENABLE_PATH
+
+if [ -f $NGINX_CONF_TEMP_FILE ]; then
+	resolve_conf "^NGINX_CONF*" $NGINX_CONF_TEMP_FILE /etc/nginx/nginx.conf
+fi
+
 
 exec nginx -g 'daemon off;'
